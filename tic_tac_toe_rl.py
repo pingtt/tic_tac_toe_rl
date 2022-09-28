@@ -80,17 +80,6 @@ def dense_layer(num_units):
 # QNetwork consists of a sequence of Dense layers followed by a dense layer
 # with `num_actions` units to generate one q_value per available action as
 # its output.
-dense_layers = [dense_layer(num_units) for num_units in fc_layer_params]
-q_values_layer = tf.keras.layers.Dense(
-    num_actions,
-    activation=None,
-    kernel_initializer=tf.keras.initializers.RandomUniform(
-        minval=-0.03, maxval=0.03),
-    bias_initializer=tf.keras.initializers.Constant(-0.2))
-q_net = sequential.Sequential(dense_layers + [q_values_layer])
-
-# ERROR: THE _observation_spec HAS TO BE CHANGE TO (9,) ONLY WILL NOT CAUSE ERROR.
-# IT HAS TO DO WITH THE sequential.Sequential ALSO. NEED TO FIND OUT MORE HOW TO SOLVE THIS
 model = sequential.Sequential([
     tf.keras.layers.Dense(100, activation="relu"),
     tf.keras.layers.Dense(50, activation="relu"),
